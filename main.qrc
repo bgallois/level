@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>zoomControl.qml</file>
-        <file>photoCaptureControls.qml</file>
+        <file>ZoomControl.qml</file>
+        <file>PhotoCaptureControls.qml</file>
         <file>main.qml</file>
     </qresource>
 </RCC>

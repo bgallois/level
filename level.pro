@@ -1,5 +1,6 @@
 QT += quick multimedia qml quickcontrols2
 CONFIG += c++11
+TARGET = OpticLevel
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -20,3 +21,20 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+ANDROID_TARGET_SDK_VERSION = 29
+ANDROID_ABIS += \
+    armeabi-v7a
+    arm64-v8a
+
+DISTFILES += \
+    android/AndroidManifest.xml \
+    android/build.gradle \
+    android/gradle.properties \
+    android/gradle/wrapper/gradle-wrapper.jar \
+    android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradlew \
+    android/gradlew.bat \
+    android/res/values/libs.xml
+
