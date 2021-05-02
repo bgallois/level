@@ -80,15 +80,23 @@ ApplicationWindow {
             y: parent.height - 200
         }
 
-        ZoomControl {
-            x : 0
-            y : 0
-            anchors.verticalCenter: parent.verticalCenter
-            width : 100
-            height: parent.height
-            currentZoom: camera.digitalZoom
-            maximumZoom: Math.min(4.0, camera.maximumDigitalZoom)
-            onZoomTo: camera.setDigitalZoom(value)
+        Slider{
+            y : 50
+            anchors.horizontalCenter: parent.horizontalCenter
+            width : parent.width/1.5
+            from: 1
+            to: Math.min(4.0, camera.maximumDigitalZoom)
+            value: camera.digitalZoom
+            handle.height: 50
+            handle.width: 50
+            onValueChanged: camera.setDigitalZoom(value)
+            Text {
+                id: zoomLabel
+                color: "white"
+                text: qsTr("Zoom ") + Math.round(parent.value*10)/10 + " x"
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: parent.bottom
+            }
         }
 
         Gyroscope {
