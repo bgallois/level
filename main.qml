@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import QtMultimedia 5.15
 import QtSensors 5.15
 import QtQuick.Controls.Material 2.15
+import Qt.labs.platform 1.1
 
 
 ApplicationWindow {
@@ -10,11 +11,32 @@ ApplicationWindow {
     Material.theme: Material.Dark
     Material.accent: Material.Orange
 
+    MessageDialog {
+        id: errorBox
+        title: "Error"
+        visible: false
+        onAccepted: {
+            Qt.quit()
+        }
+    }
+
     Rectangle {
         id : cameraUI
 
         width: parent.width
         height: parent.height
+
+        function screenshot() {
+            grabToImage(function(result) {
+                var d = new Date();
+                var re = result.saveToFile((StandardPaths.writableLocation(StandardPaths.PicturesLocation)+"").replace('file://', '') + "/" + d.getTime()  +".png");
+                // For targeting Android 11 (API level 30), the system ignores the requestLegacyExternalStorage attribute when your app is running on Android 11 devices, so your app must be ready to support scoped storage and to migrate app data for users on those devices.
+                if (!re){
+                    errorBox.text = "Can't write image to " + (StandardPaths.writableLocation(StandardPaths.PicturesLocation)+"").replace('file://', '') + "/" + d.getTime()  +".png";
+                    errorBox.visible = true;
+                }
+            });
+        }
 
         color: Material.background
         state: "PhotoCapture"
@@ -43,19 +65,6 @@ ApplicationWindow {
         Camera {
             id: camera
             captureMode: Camera.CaptureStillImage
-
-            imageCapture {
-                onImageCaptured: {
-                    photoPreview.source = preview
-                    stillControls.previewAvailable = true
-                    cameraUI.state = "PhotoPreview"
-                }
-            }
-
-            videoRecorder {
-                 resolution: "640x480"
-                 frameRate: 30
-            }
         }
 
         VideoOutput {
@@ -76,6 +85,7 @@ ApplicationWindow {
             camera: camera
             width: parent.width
             gyro: gyro
+            disp: cameraUI
             visible: cameraUI.state == "PhotoCapture"
             y: parent.height - 200
         }

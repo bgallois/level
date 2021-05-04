@@ -1,4 +1,9 @@
 QT += quick multimedia qml quickcontrols2
+
+android {
+        QT += androidextras
+}
+
 CONFIG += c++11
 TARGET = OpticLevel
 

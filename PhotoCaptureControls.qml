@@ -6,13 +6,11 @@ import QtSensors 5.15
 FocusScope {
     property Camera camera
     property Gyroscope gyro
-    property bool previewAvailable : false
+    property Rectangle disp
     property int overlay: 0
 
     property int buttonsPanelWidth: buttonPaneShadow.width
 
-    signal previewSelected
-    signal videoModeSelected
     id : captureControls
 
     Row {
@@ -58,6 +56,16 @@ FocusScope {
                     "Focusing"
                 else
                     "Unlock"
+            }
+        }
+
+        RoundButton {
+            id: takeButton
+            height: 200
+            width: 200
+            text: "Photo"
+            onClicked: {
+                disp.screenshot()
             }
         }
 
