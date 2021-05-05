@@ -134,8 +134,8 @@ ApplicationWindow {
                 width: parent.width
                 height: 5
                 y: parent.height*0.5
-                color: "red"
-                border.color: "red"
+                color: "#fd0e35"
+                border.color: "#fd0e35"
                 border.width: 5
                 radius: 10
                 rotation: 0
@@ -147,8 +147,8 @@ ApplicationWindow {
                 width: parent.width
                 height: 5
                 y: parent.height*0.5
-                color: "green"
-                border.color: "green"
+                color: "#33ff33"
+                border.color: "#33ff33"
                 border.width: 5
                 radius: 10
                 visible: stillControls.overlay == 0  || stillControls.overlay == 2
@@ -161,17 +161,23 @@ ApplicationWindow {
                 width: parent.width
                 height: 10
                 y: parent.height*0.5+gyro.xLevel*4
-                color: "red"
-                border.color: "red"
+                color: "#fd0e35"
+                border.color: "#fd0e35"
                 border.width: 5
                 radius: 10
                 visible: stillControls.overlay == 0  || stillControls.overlay == 1
                 rotation: gyro.zLevel
-                Text {
-                    padding: 10
-                    text: "Angle: " + Math.round(gyro.zLevel*10)/10 + "     Deviation: " + Math.round(gyro.xLevel*10)/10
-                    textFormat: Text.RichText
-                    color: "red"
+                Rectangle {
+                    color: Qt.rgba(0, 0, 0, 0.6)
+                    Text {
+                        padding: 10
+                        text: "Angle: " + Math.round(gyro.zLevel*10)/10 + "\tDeviation: " + Math.round(gyro.xLevel*10)/10
+                        textFormat: Text.RichText
+                        color: "#fd0e35"
+                    }
+                    width: childrenRect.width
+                    height: childrenRect.height
+                    anchors.top: parent.bottom
                 }
             }
 
@@ -181,19 +187,25 @@ ApplicationWindow {
                 width: parent.width
                 height: 10
                 y: parent.height*0.5
-                color: "green"
-                border.color: "green"
+                color: "#33ff33"
+                border.color: "#33ff33"
                 border.width: 5
                 radius: 10
                 visible: stillControls.overlay == 0  || stillControls.overlay == 2
                 rotation: 90 + gyro.zLevel
                 x: gyro.yLevel*4
-                Text {
-                    padding: 10
-                    text: "Deviation: " + Math.round(gyro.yLevel*10)/10 + "     Angle: " + Math.round(gyro.zLevel*10)/10
-                    color: "green"
-                    textFormat: Text.RichText
-                }
+                Rectangle {
+                    color: Qt.rgba(0 , 0, 0, 0.6)
+                    Text {
+                        padding: 10
+                        text: "Deviation: " + Math.round(gyro.yLevel*10)/10 + "\tAngle: " + Math.round(gyro.zLevel*10)/10
+                        color: "#33ff33"
+                        textFormat: Text.RichText
+                    }
+                width: childrenRect.width
+                height: childrenRect.height
+                anchors.top: parent.bottom
+            }
             }
         }
     }
