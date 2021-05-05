@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>PhotoCaptureControls.qml</file>
         <file>main.qml</file>
+        <file>assets/sounds/shutter.wav</file>
     </qresource>
 </RCC>

@@ -20,6 +20,11 @@ ApplicationWindow {
         }
     }
 
+    SoundEffect {
+        id: shutterSound
+        source: "qrc:/assets/sounds/shutter.wav"
+    }
+
     Rectangle {
         id : cameraUI
 
@@ -34,6 +39,9 @@ ApplicationWindow {
                 if (!re){
                     errorBox.text = "Can't write image to " + (StandardPaths.writableLocation(StandardPaths.PicturesLocation)+"").replace('file://', '') + "/" + d.getTime()  +".png";
                     errorBox.visible = true;
+                }
+                else{
+                    shutterSound.play()
                 }
             });
         }
@@ -180,7 +188,6 @@ ApplicationWindow {
                     anchors.top: parent.bottom
                 }
             }
-
 
             Rectangle {
                 id: vLevel
